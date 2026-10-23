@@ -1,0 +1,8 @@
+file,source_url,downloaded_on,bytes,sha256
+data/raw/PUBADVLIST.html,https://www.cert-in.org.in/s2cMainServlet?pageid=PUBADVLIST,2026-10-23,74626,caad0cc0e5c92c0e
+data/raw/PUBADVLIST02_2026.html,https://www.cert-in.org.in/s2cMainServlet?pageid=PUBADVLIST02&year=2026,2026-10-23,154634,fcb2ce92a4c13357
+data/raw/PUBVLNOTES02_CIAD-2026-0053.html,https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES02&VLCODE=CIAD-2026-0053,2026-10-23,77576,9ce89ded5615c193
+data/raw/PUBVLNOTES02_CIAD-2026-0052.html,https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES02&VLCODE=CIAD-2026-0052,2026-10-23,72692,07f6d03ba4f051df
+data/raw/PUBVLNOTES02_CIAD-2026-0051.html,https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES02&VLCODE=CIAD-2026-0051,2026-10-23,71738,a648d5033612a5f1
+data/raw/PUBVLNOTES02_CIAD-2026-0050.html,https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES02&VLCODE=CIAD-2026-0050,2026-10-23,78564,da5c90489c812758
+data/raw/PUBVLNOTES02_CIAD-2026-0049.html,https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES02&VLCODE=CIAD-2026-0049,2026-10-23,74733,ae3c528f2b94521b

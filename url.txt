@@ -1,0 +1,13 @@
+
+# Official CERT-In advisory archive
+https://www.cert-in.org.in/s2cMainServlet?pageid=PUBADVLIST
+
+# 2026 advisory listing
+https://www.cert-in.org.in/s2cMainServlet?pageid=PUBADVLIST02&year=2026
+
+# Individual CERT-In advisories
+https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES02&VLCODE=CIAD-2026-0053
+https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES02&VLCODE=CIAD-2026-0052
+https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES02&VLCODE=CIAD-2026-0051
+https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES02&VLCODE=CIAD-2026-0050
+https://www.cert-in.org.in/s2cMainServlet?pageid=PUBVLNOTES02&VLCODE=CIAD-2026-0049
