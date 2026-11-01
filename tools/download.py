@@ -4,10 +4,12 @@ import os
 import sys
 import time
 from datetime import date
+from urllib.parse import parse_qs, urlparse
+
 # from urllib.parse import urlparse
 from urllib.robotparser import RobotFileParser
+
 import requests
-from urllib.parse import urlparse, parse_qs
 
 RAW = "data/raw"
 MANIFEST = "data/manifest.csv"
@@ -81,14 +83,6 @@ def main(list_file):
             log.writerow([path, url, date.today().isoformat(), len(r.content), digest])
             print("saved", path, len(r.content), "bytes")
             time.sleep(DELAY)
-            for url in urls:
-                if not url or url.startswith("#"):
-                    continue
-
-                print("Processing URL:", url)
-
-                path = os.path.join(RAW, name_for(url))
-
 
 if __name__ == "__main__":
     main(sys.argv[1])
