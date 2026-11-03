@@ -5,7 +5,7 @@ import sys
 import time
 from datetime import date
 from pathlib import Path
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import parse_qs, urlparse
 from urllib.robotparser import RobotFileParser
 
 from playwright.sync_api import sync_playwright
