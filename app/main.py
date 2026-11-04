@@ -30,7 +30,7 @@ SettingsDep = Annotated[Settings, Depends(get_settings)]
 
 @app.get("/health")
 def health(settings: SettingsDep) -> dict:
-    """Liveness: the process is up. Must not call the LLM or DB."""
+    """Check whether the application is running."""
     return {
         "status": "ok",
         "app": settings.app_name,
@@ -38,12 +38,29 @@ def health(settings: SettingsDep) -> dict:
     }
 
 
+@app.get("/ready")
+def ready() -> dict:
+    """Check whether the application and SQLite database are ready."""
+    try:
+        initialize_usage_db()
+        summary = get_usage_summary()
+        return {
+            "status": "ready",
+            "database": "ok",
+            "total_requests": summary["total_requests"],
+        }
+    except Exception as exc:
+        raise HTTPException(
+            status_code=503,
+            detail="Database is not ready",
+        ) from exc
+
+
 @app.post("/generate", response_model=GenerateResponse)
 def generate(request: GenerateRequest, settings: SettingsDep):
-    """Generate an answer and record its token usage."""
+    """Generate an answer and record token usage."""
     try:
         result = LLMService(settings).generate(request.prompt)
-
         usage = result["usage"]
 
         record_usage(
@@ -62,10 +79,16 @@ def generate(request: GenerateRequest, settings: SettingsDep):
             total_tokens=usage["total_tokens"],
         )
 
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=500,
+            detail=str(exc),
+        ) from exc
+
     except RuntimeError as exc:
         raise HTTPException(
             status_code=502,
-            detail="All configured LLM models failed",
+            detail="All configured Gemini models failed",
         ) from exc
 
 

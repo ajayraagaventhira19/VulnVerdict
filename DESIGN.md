@@ -249,4 +249,3 @@ The application is containerized using Docker.
 
 
 The Docker image runs the FastAPI application and exposes its API endpoints. The Gemini API key is supplied through an environment variable and is not committed to the Git repository.
-
