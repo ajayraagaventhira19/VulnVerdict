@@ -1,4 +1,3 @@
-
 import sqlite3
 from pathlib import Path
 
@@ -32,12 +31,7 @@ def initialize_usage_db():
         )
 
         # Safely update an existing database without deleting records.
-        columns = {
-            row["name"]
-            for row in connection.execute(
-                "PRAGMA table_info(usage_records)"
-            ).fetchall()
-        }
+        columns = {row["name"] for row in connection.execute("PRAGMA table_info(usage_records)").fetchall()}
 
         if "thoughts_tokens" not in columns:
             connection.execute(
@@ -46,7 +40,6 @@ def initialize_usage_db():
                 ADD COLUMN thoughts_tokens INTEGER NOT NULL DEFAULT 0
                 """
             )
-
 
 
 def record_usage(
@@ -63,8 +56,7 @@ def record_usage(
     billable_output_tokens = response_tokens + thoughts_tokens
 
     estimated_cost_usd = (
-        prompt_tokens * input_price_per_million
-        + billable_output_tokens * output_price_per_million
+        prompt_tokens * input_price_per_million + billable_output_tokens * output_price_per_million
     ) / 1_000_000
 
     with get_connection() as connection:
@@ -89,7 +81,6 @@ def record_usage(
                 estimated_cost_usd,
             ),
         )
-
 
 
 def get_usage_summary() -> dict:

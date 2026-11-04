@@ -1,4 +1,3 @@
-
 import csv
 import hashlib
 import sys
@@ -28,6 +27,7 @@ robots = {}
 # CHECK ROBOTS.TXT
 # --------------------------------------------------
 
+
 def allowed(url):
     root = "{0.scheme}://{0.netloc}".format(urlparse(url))
 
@@ -54,6 +54,7 @@ def allowed(url):
 # GENERATE UNIQUE PDF FILENAME
 # --------------------------------------------------
 
+
 def name_for(url):
     parsed = urlparse(url)
     params = parse_qs(parsed.query)
@@ -78,6 +79,7 @@ def name_for(url):
 # CALCULATE SHA256 HASH
 # --------------------------------------------------
 
+
 def calculate_hash(file_path):
     sha256 = hashlib.sha256()
 
@@ -92,18 +94,16 @@ def calculate_hash(file_path):
 # LOAD URLS
 # --------------------------------------------------
 
+
 def load_urls(list_file):
     with open(list_file, encoding="utf-8") as file:
-        return [
-            line.strip()
-            for line in file
-            if line.strip() and not line.strip().startswith("#")
-        ]
+        return [line.strip() for line in file if line.strip() and not line.strip().startswith("#")]
 
 
 # --------------------------------------------------
 # MAIN DOWNLOAD FUNCTION
 # --------------------------------------------------
+
 
 def main(list_file):
 
@@ -122,37 +122,21 @@ def main(list_file):
     skipped = 0
     failed = 0
 
-    with open(
-        MANIFEST,
-        "a",
-        newline="",
-        encoding="utf-8"
-    ) as mf:
-
+    with open(MANIFEST, "a", newline="", encoding="utf-8") as mf:
         log = csv.writer(mf)
 
         if new_manifest:
-            log.writerow([
-                "file",
-                "source_url",
-                "downloaded_on",
-                "bytes",
-                "sha256"
-            ])
+            log.writerow(["file", "source_url", "downloaded_on", "bytes", "sha256"])
 
         with sync_playwright() as playwright:
-
             browser = playwright.chromium.launch()
 
-            page = browser.new_page(
-                user_agent=USER_AGENT
-            )
+            page = browser.new_page(user_agent=USER_AGENT)
 
             page.set_default_navigation_timeout(TIMEOUT)
 
             try:
                 for index, url in enumerate(urls, start=1):
-
                     print(f"\n[{index}/{len(urls)}] Processing:")
                     print(url)
 
@@ -173,11 +157,7 @@ def main(list_file):
                     try:
                         print("Loading webpage...")
 
-                        response = page.goto(
-                            url,
-                            wait_until="domcontentloaded",
-                            timeout=TIMEOUT
-                        )
+                        response = page.goto(url, wait_until="domcontentloaded", timeout=TIMEOUT)
 
                         if response is None or not response.ok:
                             print("Failed to load webpage.")
@@ -185,10 +165,7 @@ def main(list_file):
                             continue
 
                         # Wait for JavaScript and fonts
-                        page.wait_for_load_state(
-                            "load",
-                            timeout=TIMEOUT
-                        )
+                        page.wait_for_load_state("load", timeout=TIMEOUT)
 
                         page.evaluate("""
                             () => document.fonts.ready
@@ -210,7 +187,7 @@ def main(list_file):
                             path=str(output_file),
                             format="A4",
                             print_background=True,
-                            prefer_css_page_size=True
+                            prefer_css_page_size=True,
                         )
 
                         # Calculate file details
@@ -218,13 +195,7 @@ def main(list_file):
                         digest = calculate_hash(output_file)
 
                         # Record successful download
-                        log.writerow([
-                            str(output_file),
-                            url,
-                            date.today().isoformat(),
-                            file_size,
-                            digest
-                        ])
+                        log.writerow([str(output_file), url, date.today().isoformat(), file_size, digest])
 
                         mf.flush()
 
@@ -235,7 +206,6 @@ def main(list_file):
                         print("SHA256:", digest)
 
                     except Exception as error:
-
                         # Remove incomplete PDF if one was created
                         if output_file.exists():
                             output_file.unlink()
@@ -271,7 +241,6 @@ def main(list_file):
 # --------------------------------------------------
 
 if __name__ == "__main__":
-
     if len(sys.argv) < 2:
         print("Usage: python tools/download.py urls.txt")
         sys.exit(1)

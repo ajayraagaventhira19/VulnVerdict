@@ -1,4 +1,3 @@
-
 def test_usage_starts_at_zero(client):
     response = client.get("/usage")
 
@@ -36,6 +35,7 @@ def test_usage_records_multiple_requests(client):
     assert data["total_prompt_tokens"] == 25
     assert data["total_response_tokens"] == 45
     assert data["total_tokens"] == 70
+
 
 def test_usage_calculates_estimated_cost(client):
     from app.services.usage_service import record_usage

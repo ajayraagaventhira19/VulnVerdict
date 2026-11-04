@@ -1,4 +1,3 @@
-
 from google import genai
 from google.genai import types
 
@@ -44,29 +43,18 @@ class LLMService:
                     "model": model,
                     "answer": response.text or "",
                     "usage": {
-                        "prompt_tokens": (
-                            usage.prompt_token_count if usage else 0
-                        ),
-                        "response_tokens": (
-                            usage.candidates_token_count if usage else 0
-                        ),
-                        "thoughts_tokens": (
-                            usage.thoughts_token_count if usage else 0
-                        ),
-                        "total_tokens": (
-                            usage.total_token_count if usage else 0
-                        ),
+                        "prompt_tokens": (usage.prompt_token_count if usage else 0),
+                        "response_tokens": (usage.candidates_token_count if usage else 0),
+                        "thoughts_tokens": (usage.thoughts_token_count if usage else 0),
+                        "total_tokens": (usage.total_token_count if usage else 0),
                     },
                 }
 
             except Exception as exc:
                 print(
-                    f"Gemini model failed: {model} | "
-                    f"{type(exc).__name__}: {exc}",
+                    f"Gemini model failed: {model} | {type(exc).__name__}: {exc}",
                     flush=True,
                 )
                 errors.append(f"{model}: {exc}")
 
-        raise RuntimeError(
-            "All configured Gemini models failed: " + " | ".join(errors)
-        )
+        raise RuntimeError("All configured Gemini models failed: " + " | ".join(errors))
