@@ -25,7 +25,8 @@ Commit after every class. Tag every Friday: `git tag week-N && git push origin w
 - [ ] docs/EVAL_v0.md with my 10 questions scored
 - [ ] Tag week-3 pushed
 
-## Daily log
-| Date | What I did today | Commit |
-|---|---|---|
-| | | |
+## Daily Log
+
+| Date          | What I did today                                      | Commit  |
+|---------------|-------------------------------------------------------|---------|
+| 04 Nov 2026   | CI workflow (test + docker-smoke), pre-commit hooks, Render deployment, live link added to README | Pending |

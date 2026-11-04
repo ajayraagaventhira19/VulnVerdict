@@ -1,4 +1,7 @@
 # VulnVerdict
+[![CI](https://github.com/ajayraagaventhira19/VulnVerdict/blob/main/.github/workflows/ci.yml)]
+
+**Live:** https://vulnverdict.onrender.com/health · first request after 15 idle minutes takes about a minute (free tier)
 
 ## Problem
 
